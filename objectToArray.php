@@ -1,22 +1,21 @@
 <?php
 
 /**
- * CONVERTIR DE OBJETOS A ARRAY RECURSIVAMENTE
+ * CONVERTIR OBJETO EN ARRAY RECURSIVAMENTE
  * @author Steven Pardo
  */
-function objectToArray ( $var ) {
-	$arr = array();
+function objectToArray($object) {
+	$response = array();
 
-	foreach ( $var as $i=>$v ) {
-		$v = is_object( $v ) ? get_object_vars( $v ) : $v ;
-		if ( is_array( $v ) ) {
-			$arr[$i] = objectToArray( $v );
+	foreach($object as $i => $item) {
+		$object = is_object($v) ? get_object_vars($item) : $item;
+		
+		if(is_array($item)) {
+			$response[$i] = objectToArray($item);
 		} else {
-			$arr[$i] = $v ;
+			$response[$i] = $item;
 		}
 	}
 
-	return $arr ;
+	return $response;
 }
-
-?>
